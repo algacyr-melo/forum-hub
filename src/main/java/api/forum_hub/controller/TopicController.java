@@ -63,10 +63,10 @@ public class TopicController {
     }
 
     @GetMapping("/{id}")
-    public TopicDetailResponse getTopicDetail(@PathVariable Long id) {
+    public ResponseEntity<TopicDetailResponse> getTopicDetail(@PathVariable Long id) {
         Topic topic = topicRepository.getReferenceById(id);
 
-        return new TopicDetailResponse(topic);
+        return ResponseEntity.ok(new TopicDetailResponse(topic));
     }
 
     @PutMapping
@@ -88,6 +88,4 @@ public class TopicController {
 
         return ResponseEntity.noContent().build();
     }
-
-
 }
