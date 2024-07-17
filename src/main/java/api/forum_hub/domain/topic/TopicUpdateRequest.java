@@ -1,7 +1,7 @@
 package api.forum_hub.domain.topic;
 
+import api.forum_hub.domain.author.AuthorDto;
 import api.forum_hub.domain.course.CourseDto;
-import api.forum_hub.domain.user.UserDto;
 import jakarta.validation.constraints.NotNull;
 
 public record TopicUpdateRequest
@@ -11,7 +11,7 @@ public record TopicUpdateRequest
 
     String title,
     String message,
-    UserDto author,
+    AuthorDto author,
     CourseDto course
 ) {
 }

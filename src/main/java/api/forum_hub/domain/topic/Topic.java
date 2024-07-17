@@ -3,7 +3,7 @@ package api.forum_hub.domain.topic;
 import java.time.LocalDateTime;
 
 import api.forum_hub.domain.course.Course;
-import api.forum_hub.domain.user.User;
+import api.forum_hub.domain.author.Author;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -37,7 +37,7 @@ public class Topic {
     private TopicStatus status;
 
     @Embedded
-    private User author;
+    private Author author;
 
     @Embedded
     private Course course;
@@ -45,7 +45,7 @@ public class Topic {
     public Topic(TopicCreationRequest creationData) {
         this.title = creationData.title();
         this.message = creationData.message();
-        this.author = new User(creationData.author());
+        this.author = new Author(creationData.author());
         this.course = new Course(creationData.course());
 
         this.creationDate = LocalDateTime.now();

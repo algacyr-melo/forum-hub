@@ -3,9 +3,7 @@ package api.forum_hub.domain.topic;
 import java.time.LocalDateTime;
 
 import api.forum_hub.domain.course.Course;
-import api.forum_hub.domain.course.CourseDto;
-import api.forum_hub.domain.user.User;
-import api.forum_hub.domain.user.UserDto;
+import api.forum_hub.domain.author.Author;
 
 public record TopicDetailResponse
 (
@@ -14,7 +12,7 @@ public record TopicDetailResponse
     String message,
     LocalDateTime creationDate,
     TopicStatus status,
-    User author,
+    Author author,
     Course course
 ) {
     public TopicDetailResponse(Topic topic) {
