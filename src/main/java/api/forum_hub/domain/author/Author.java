@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @Embeddable
 public class Author {
 
-    @Column(unique = true)
     private String username;
 
     @Column(name = "display_name")

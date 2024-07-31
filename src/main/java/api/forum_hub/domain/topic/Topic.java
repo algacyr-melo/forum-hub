@@ -15,10 +15,10 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Entity
-
 @NoArgsConstructor
 @Getter
+
+@Entity
 public class Topic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

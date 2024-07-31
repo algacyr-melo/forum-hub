@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.Date;
 
 @Service
 public class TokenService {
@@ -26,10 +25,11 @@ public class TokenService {
             Algorithm algorithm = Algorithm.HMAC256(secret);
 
             String token = JWT.create()
-                    .withIssuer("forumHub")
-                    .withSubject(user.getUsername())
-                    .withExpiresAt(expiresDate())
-                    .sign(algorithm);
+                .withIssuer("forumHub")
+                .withSubject(user.getUsername())
+                .withExpiresAt(expiresDate())
+                .sign(algorithm);
+
             return token;
         } catch (JWTCreationException exception) {
             throw new RuntimeException("Error on token generation", exception);
@@ -37,19 +37,18 @@ public class TokenService {
     }
 
     public String getSubject(String tokenJWT) {
-        String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJpc3MiOiJhdXRoMCJ9.AbIJTDMFc7yUa5MhvcP03nJPyCPzZtQcGEp-zWfOkEE";
         DecodedJWT decodedJWT;
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             JWTVerifier verifier = JWT.require(algorithm)
-                    // specify any specific claim validations
-                    .withIssuer("forumHub")
-                    // reusable verifier instance
-                    .build();
+                // specify any specific claim validations
+                .withIssuer("forumHub")
+                // reusable verifier instance
+                .build();
 
             decodedJWT = verifier.verify(tokenJWT);
             return decodedJWT.getSubject();
-        } catch (JWTVerificationException exception){
+        } catch (JWTVerificationException exception) {
             throw new RuntimeException("Invalid token");
         }
     }

@@ -5,8 +5,7 @@ import java.time.LocalDateTime;
 import api.forum_hub.domain.course.Course;
 import api.forum_hub.domain.author.Author;
 
-public record TopicDetailResponse
-(
+public record TopicDetailResponse(
     Long id,
     String title,
     String message,

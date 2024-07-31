@@ -1,6 +1,6 @@
 package api.forum_hub.controller;
 
-import java.util.Optional;
+import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -39,25 +39,21 @@ public class TopicController {
     @PostMapping
     @Transactional
     public ResponseEntity<TopicDetailResponse> createTopic(
-        @Valid @RequestBody
-        TopicCreationRequest creationData, UriComponentsBuilder uriComponentsBuilder
-    ) {
+            @Valid @RequestBody TopicCreationRequest creationData, UriComponentsBuilder uriComponentsBuilder) {
         Topic topic = new Topic(creationData);
         topicRepository.save(topic);
 
-        var location = uriComponentsBuilder
-            .path("/medicos/{id}")
-            .buildAndExpand(topic.getId())
-            .toUri();
+        URI location = uriComponentsBuilder
+                .path("/medicos/{id}")
+                .buildAndExpand(topic.getId())
+                .toUri();
 
         return ResponseEntity.created(location).body(new TopicDetailResponse(topic));
     }
 
     @GetMapping
     public ResponseEntity<Page<TopicDetailResponse>> getTopics(
-        @PageableDefault(size = 10, sort = {"creationDate"})
-        Pageable pagination
-    ) {
+            @PageableDefault(size = 10, sort = { "creationDate" }) Pageable pagination) {
         var page = topicRepository.findAll(pagination).map(TopicDetailResponse::new);
         return ResponseEntity.ok(page);
     }
@@ -72,9 +68,7 @@ public class TopicController {
     @PutMapping
     @Transactional
     public ResponseEntity<TopicDetailResponse> updateTopic(
-        @Valid @RequestBody
-        TopicUpdateRequest updateData
-    ) {
+            @Valid @RequestBody TopicUpdateRequest updateData) {
         Topic topic = topicRepository.getReferenceById(updateData.id());
         topic.update(updateData);
 
